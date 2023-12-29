@@ -9,13 +9,13 @@ namespace MLStart
         static void Main(string[] args)
         {
             int[] k1 = GenerateArrayInt(5, 19);
-            WriteArrayInt(k1);
-            Console.WriteLine("------------------");
             double[] x = GenerateArrayRandomDouble(-12.0, 15.0, 13);
-            WriteArrayDouble(x);
-            Console.WriteLine("------------------");
             double[,] k2 = GenerateMatrix(k1, x);
             Console.WriteLine("------------------");
+            foreach (double i in k2)
+            {
+                Console.WriteLine(i);
+            }
 
 
 
@@ -32,28 +32,24 @@ namespace MLStart
                 {
                     double x_elem = x[j];
                     int[] elements = new int[] { 5, 7, 11, 15 };
-
+                    double result = default;
 
                     if (k_elem == 9)
                     {
-                        array[i, j] = Math.Sin(Math.Sin(Math.Pow((x_elem / (x_elem + 0.5)), x_elem)));
+                        result = Math.Sin(Math.Sin(Math.Pow((x_elem / (x_elem + 0.5)), x_elem)));
                     }
                     else if (elements.Contains(k_elem))
                     {
-                        //array[i, j] = Math.Pow((0.5/(Math.Tan(2*x_elem) + (2/3))), Math.Cbrt(Math.Cbrt(x_elem)));
+                        result = Math.Pow((0.5/(Math.Tan(2*x_elem) + (2/3))), Math.Cbrt(Math.Cbrt(x_elem)));
                     }
                     else
                     {
-                        array[i, j] = Math.Tan(   Math.Pow(    ((Math.Pow(Math.E, (1-x_elem)/Math.PI)  / 3)  / 4)    , 3)   );
+                        result = Math.Tan(Math.Pow(((Math.Pow(Math.E, (1-x_elem)/Math.PI) / 3) / 4), 3));
                     }
 
-
-
-
-
+                    array[i, j] = result;
+                    Console.WriteLine($"k[i] - {k_elem} x[j] - {x_elem} f(x[j]) - {result}");
                 }
-                Console.Write($"\n");
-
             }
 
             return array;
